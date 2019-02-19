@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 /**
- * <p></p>
+ * <p>Class 工具类</p>
  * <pre>
  *     author      XueQi
  *     date        2019-02-18

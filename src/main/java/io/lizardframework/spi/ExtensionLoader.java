@@ -1,5 +1,6 @@
 package io.lizardframework.spi;
 
+import io.lizardframework.spi.common.ClassLoaderUtils;
 import io.lizardframework.spi.common.Holder;
 
 import java.io.BufferedReader;
@@ -166,8 +167,8 @@ public class ExtensionLoader<T> {
 
 		try {
 			// 获取ClassLoader，并装载配置文件
-			ClassLoader      classLoader = ExtensionLoader.class.getClassLoader();
-			Enumeration<URL> urls        = classLoader.getResources(fileName);
+			ClassLoader      classLoader = ClassLoaderUtils.getCurrentClassLoader();
+			Enumeration<URL> urls        = classLoader != null ? classLoader.getResources(fileName) : ClassLoader.getSystemResources(fileName);
 
 			if (urls != null) {
 				while (urls.hasMoreElements()) {

@@ -1,7 +1,7 @@
 package io.lizardframework.spi.common;
 
 /**
- * <p>SPI加载并发锁对象，保证多线程下对于同一个 name 的加载，只有一个线程在执行，保证线程安全</p>
+ * <p>SPI加载并发锁对象，用于保证线程安全</p>
  * <pre>
  *     author      XueQi
  *     date        2019-02-18

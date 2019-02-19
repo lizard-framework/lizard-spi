@@ -1,6 +1,7 @@
 package io.lizardframework.spi;
 
 import io.lizardframework.spi.common.ClassLoaderUtils;
+import io.lizardframework.spi.common.ClassUtils;
 import io.lizardframework.spi.common.Holder;
 
 import java.io.BufferedReader;
@@ -101,13 +102,14 @@ public class ExtensionLoader<T> {
 				synchronized (CACHE_SINGLETON_OBJ) {
 					extensionObject = CACHE_SINGLETON_OBJ.get(name);
 					if (extensionObject == null) {
-
+						extensionObject = ClassUtils.newInstanceWithArgs(clazz, argTypes, args);
+						CACHE_SINGLETON_OBJ.put(name, extensionObject);
 					}
 				}
 			}
 			return (T) extensionObject;
 		} else {
-			return null;
+			return (T) ClassUtils.newInstanceWithArgs(clazz, argTypes, args);
 		}
 	}
 

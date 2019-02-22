@@ -29,9 +29,10 @@ public class ExtensionClass<T> {
 	 */
 	private volatile T                  instance;
 
-	public ExtensionClass(Class<? extends T> clazz, String name) {
+	public ExtensionClass(Class<? extends T> clazz, String name, Extensions extensions) {
 		this.clazz = clazz;
 		this.name = name;
+		this.extensions = extensions;
 	}
 
 	/**
@@ -60,4 +61,21 @@ public class ExtensionClass<T> {
 		}
 		throw new IllegalStateException("class of ExtensionClass is null");
 	}
+
+	public Class<? extends T> getClazz() {
+		return clazz;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Extensions getExtensions() {
+		return extensions;
+	}
+
+	public T getInstance() {
+		return instance;
+	}
+
 }

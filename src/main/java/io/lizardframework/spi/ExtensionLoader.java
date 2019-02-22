@@ -114,18 +114,6 @@ public class ExtensionLoader<T> {
 	}
 
 	/**
-	 * 创建扩展点实现对象
-	 *
-	 * @param clazz
-	 * @param argTypes
-	 * @param args
-	 * @return
-	 */
-	private T createExtensionsObject(Class<?> clazz, Class[] argTypes, Object[] args) {
-		return null;
-	}
-
-	/**
 	 * 获取接口所有的扩展点SPI配置的 name 和 class
 	 *
 	 * @return

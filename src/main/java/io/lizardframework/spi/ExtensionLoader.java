@@ -38,6 +38,7 @@ public class ExtensionLoader<T> {
 
 	public ExtensionLoader(Class<T> type) {
 		this.type = type;
+		this.isExtensionAnnontation(this.type);
 		this.loadExtensionClasses();
 	}
 
@@ -180,7 +181,7 @@ public class ExtensionLoader<T> {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type) {
+	/*public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type) {
 		if (type == null)
 			throw new IllegalArgumentException("Extension type is null");
 		if (!type.isInterface())
@@ -196,6 +197,7 @@ public class ExtensionLoader<T> {
 		}
 		return loader;
 	}
+*/
 
 	/**
 	 * 判断当前扩展点类型的接口是否有SPI注解
@@ -204,7 +206,10 @@ public class ExtensionLoader<T> {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> boolean isExtensionAnnontation(Class<T> type) {
-		return type.isAnnotationPresent(SPI.class);
+	public <T> void isExtensionAnnontation(Class<T> type) {
+		boolean isAnnon = type.isAnnotationPresent(SPI.class);
+		if (!isAnnon)
+			throw new IllegalArgumentException("Extension type(" + type + ") is not extension, because without @" +
+					SPI.class.getSimpleName() + " Annontation");
 	}
 }

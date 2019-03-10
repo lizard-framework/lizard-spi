@@ -31,7 +31,7 @@ public class ExtensionLoader<T> {
 	private static final String DEFAULT_CHARSET           = "UTF-8";
 	// SPI路径
 	private static final String SERVICR_DIRECTORY         = "META-INF/lizard/services/";
-	private static final String LIZARD_INTERNAL_DIRECTORY = "META-INF/dubbo/internal/";
+	private static final String LIZARD_INTERNAL_DIRECTORY = "META-INF/lizard/internal/";
 
 	public ExtensionLoader(Class<T> type) {
 		this.type = type;

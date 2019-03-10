@@ -1,11 +1,38 @@
 # lizard-spi
 ## 简介
-  一直构思做一套以学习和实用为主的开发框架集合，lizard-spi 是这个框架的第一部分，是对Java SPI机制的扩展；同时也是为后续 lizard-rpc 框架的开发奠定扩展的基础。
+  lizard-spi 是一个基于 Java Spi 和 Dubbo Spi 思想基础上的 SPI 支持框架，让使用方快速灵活的扩展应用程序。
   
-  传统的Java SPI机制为我们提供了一种灵活的实现扩展机制，但是也有弊端。
+## 功能特性
+  - 支持 单例扩展 和 prototype 扩展
+  - 扩展描述文件支持 key value 模式的多实现配置
+  - 类似 Alibaba Dubbo Spi 的使用方式，但不与任何框架强耦合
+
+## 快速入门
+### 引入 lizard-spi
+  请先将源码 clone 到本地，然后执行 mvn install 安装到本地仓库进行测试与使用调试。具体命令如下：
+    
+    git clone git@github.com:lizard-framework/lizard-spi.git
+    
+    cd lizard-spi
+    
+    mvn clean install
   
-  例如：ServiceLoader 在遍历的时候，会实例化所有的扩展对象，没有办法控制某一个扩展点的实例化；同时，对于单例场景的支持，需要自己手工实现缓存控制。
+  在工程的 pom.xml文件中引入 lizard-spi 的依赖
   
-  其实 dubbo 框架的 spi 机制已经实现了对 java 原生 spi 的扩展，但是与框架内部集成耦合，没有做到轻量化。
+  ```xml
+  <dependency>
+    <groupId>io.lizardframework</groupId>
+    <artifactId>lizard-spi</artifactId>
+    <version>1.0-SNAPHSHOT</version>
+  </dependency>
+  ```
+  至此 lizard-spi 已经成功引入到您的工程中，接下来让我们尝试一下具体的使用吧！
   
-  lizard-spi 在 dubbo spi 机制思想的基础上，将 spi 机制独立抽象成没有任何外部依赖的框架工具，让使用方可以快速接入，体验 spi 思想带来的便捷与好处，真正做到解耦。
+### 编写一个简单的单例扩展实例
+
+
+## 更新说明
+  - 1.0-SNAPHSHOT
+    1. 初步完成SPI整体功能
+    2. 完成单元测试 
+  

@@ -27,9 +27,6 @@ public class ExtensionLoader<T> {
 	// 缓存扩展点 name 和 包装类 映射
 	private final Map<String, ExtensionClass<T>> CACHE_EXTENSION_CLAZZ = new ConcurrentHashMap<>();
 
-	// 存放扩展点类型和加载器的缓存
-	private static final Map<Class<?>, ExtensionLoader<?>> EXTENSION_LOADERS = new ConcurrentHashMap<>();
-
 	// 默认字符集
 	private static final String DEFAULT_CHARSET           = "UTF-8";
 	// SPI路径
@@ -83,21 +80,20 @@ public class ExtensionLoader<T> {
 		// 获取ExtensionClass，从中获取实例
 		ExtensionClass<T> extensionClass = CACHE_EXTENSION_CLAZZ.get(name);
 		if (extensionClass == null) {
-			// todo
+			throw new IllegalStateException("Error when load extension type(" + this.type + ", name:" + name + ") class is null");
 		}
 
 		return extensionClass.getInstance(argTypes, args);
 	}
 
 	/**
-	 * 装载该接口的SPI扩展实现和 name 的缓存, 该方法已经在getExtensionClasses中同步过
+	 * 装载该接口的SPI扩展实现和 name 的缓存
 	 *
 	 * @return
 	 */
 	private synchronized void loadExtensionClasses() {
 		this.loadFiles(SERVICR_DIRECTORY);
 		this.loadFiles(LIZARD_INTERNAL_DIRECTORY);
-
 	}
 
 	/**
@@ -174,30 +170,6 @@ public class ExtensionLoader<T> {
 		}
 	}
 
-	/**
-	 * 获取扩展点加载器
-	 *
-	 * @param type
-	 * @param <T>
-	 * @return
-	 */
-	/*public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type) {
-		if (type == null)
-			throw new IllegalArgumentException("Extension type is null");
-		if (!type.isInterface())
-			throw new IllegalArgumentException("Extension type(" + type + ") not interface");
-		if (!isExtensionAnnontation(type))
-			throw new IllegalArgumentException("Extension type(" + type + ") is not extension, because without @" +
-					SPI.class.getSimpleName() + " Annontation");
-
-		ExtensionLoader<T> loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
-		if (loader == null) {
-			EXTENSION_LOADERS.putIfAbsent(type, new ExtensionLoader<>(type));
-			loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
-		}
-		return loader;
-	}
-*/
 
 	/**
 	 * 判断当前扩展点类型的接口是否有SPI注解

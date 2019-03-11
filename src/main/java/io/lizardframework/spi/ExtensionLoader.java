@@ -35,7 +35,9 @@ public class ExtensionLoader<T> {
 
 	public ExtensionLoader(Class<T> type) {
 		this.type = type;
+		// 判断是否有SPI注解
 		this.isExtensionAnnontation(this.type);
+		// 装载该接口的SPI扩展实现和 name 的缓存
 		this.loadExtensionClasses();
 	}
 
